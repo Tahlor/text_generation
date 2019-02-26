@@ -25,6 +25,10 @@ var/
 .installed.cfg
 *.egg
 
+# Data
+text/
+data/
+
 # Passwords and cookies
 password.txt
 cookies/
