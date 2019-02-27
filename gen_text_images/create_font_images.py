@@ -132,8 +132,9 @@ class TextGenerator():
 
 if __name__ == '__main__':
     print(os.getcwd())
-    path = r"./text/raw_text_10000.txt"
-    tg=TextGenerator(input_text_path = path, font_folder=r"./fonts/font_pack", output_path="./data")
+    root = ".."
+    path = root + r"/text/raw_text_10000.txt"
+    tg=TextGenerator(input_text_path = path, font_folder=root + r"/fonts/font_pack", output_path="./data")
     tg.loop()
 
 
