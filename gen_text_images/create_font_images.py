@@ -5,6 +5,7 @@ import re
 import numpy as np
 from gen_text_images import process_images
 import utils
+import multiprocessing
 
 def open_file(path):
     with open(path, "r") as f:
@@ -89,6 +90,9 @@ class TextGenerator():
     def save_PIL(self):
         image.save(os.path.join(output_path, output_name))
 
+    def collect_result(self, result):
+        print(result)
+
     def main(self, font_name, save=True):
         text = tg.get_new_text()
         font_path, output_path = self.get_font(font_name)
@@ -107,17 +111,24 @@ class TextGenerator():
             #output_path = os.path.join("./data", font_name + ".png")
             output_path = os.path.join("./data", output_name)
             process_images.save_image(output_path, image)
+            return output_path
         else:
             return image
 
     def loop(self, save=True, n=4000000):
+        poolcount = multiprocessing.cpu_count()
+        self.pool = multiprocessing.Pool(processes=poolcount)
+
         fonts = self.get_fonts()
         for i in range(0,n):
             font_name = fonts[i % len(fonts)]
             try:
-                self.main(font_name, True)
+                self.pool.apply_async(self.main, args=(font_name, True), callback=self.collect_result)
+                print("HERE")
+                #self.main(font_name, True)
             except:
                 print("Problem with {}".format(font_name))
+        self.pool.close()
 
 if __name__ == '__main__':
     print(os.getcwd())
