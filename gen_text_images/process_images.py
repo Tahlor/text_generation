@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import argparse
 
 # crop too long images for now? can edit bounding boxes to get GT
     # you don't need GT, you need to have a language model etc. anyway?
@@ -140,8 +141,11 @@ def loop(input="./datasets/handwriting/testA", output=None):
             cv2.imwrite(output_path, image)
 
 if __name__=='__main__':
-    #loop("./datasets/handwriting/testA")
-    loop("./datasets/handwriting/trainA")
-    loop("./datasets/handwriting/val")
-
+    parser = argparse.ArgumentParser()
+    parser.add_argument('input', type=str, default='.', help='Input path to data to process.')
+    parser.add_argument('output', type=str, default=None, help='Output path for processed data.')
+    opts = parser.parse_args()
+    if opts.output is None:
+        opts.output=opts.input
+    loop(opts.input, opts.output)
     #end_to_end("/media/taylor/eef4fe97-0587-4acb-b65d-f0ad5ed8d623/taylor/GitHub/MUNIT/datasets/handwriting/testA/a05-058-06.png")

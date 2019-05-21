@@ -7,6 +7,10 @@ from gen_text_images import process_images
 import utils
 import multiprocessing
 
+
+""" These tools are for taking existing text, and generating font images from them
+"""
+
 def open_file(path):
     with open(path, "r") as f:
         return "".join(f.readlines())

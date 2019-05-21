@@ -6,7 +6,7 @@ import re
 csv.field_size_limit(sys.maxsize)
 
 """ Process large corpus of text, clean out symbols
-
+Used for e.g. creating font images.
 """
 
 input_path = r"./text/documents_utf8_filtered_20pageviews.csv"
