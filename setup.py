@@ -6,7 +6,7 @@ def read_md(file_path):
         return f.read()
 
 setup(name='gen_text_images',
-      version='0.0.1',
+      version='0.0.3',
       description='Generate images of text in different fonts',
       long_description= "" if not path.isfile("README.md") else read_md('README.md'),
       author="Taylor Archibald",
